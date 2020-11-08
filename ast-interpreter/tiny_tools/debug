@@ -1,0 +1,27 @@
+# set args "extern int GET();extern void * MALLOC(int);extern void FREE(void *);extern void PRINT(int);int b=10;int f(int x,int y) {PRINT(x);PRINT(y);  if (y > 0)   return x + f(x,y-1);  else     return 0;}int main() {   int a=2;   PRINT(f(b,a));}'"
+set args "`cat ./test.c`"
+define Stack
+print mStack.back()
+end
+# b InterpreterVisitor::VisitBinaryOperator
+# b InterpreterVisitor::VisitCallExpr
+# b InterpreterVisitor::VisitCastExpr
+# b InterpreterVisitor::VisitDeclRefExpr
+# b InterpreterVisitor::VisitDeclStmt
+# b InterpreterVisitor::VisitIntegerLiteral
+# b InterpreterVisitor::VisitIfStmt
+# b InterpreterVisitor::VisitUnaryOperator
+# b InterpreterVisitor::VisitArraySubscriptExpr
+# b /root/ast-interpreter/ASTInterpreter.cpp:59
+# b /root/ast-interpreter/Environment.h:315
+# b Environment::binop
+b Environment::unaryop
+# b Environment::cast
+# b Environment::rstmt
+# b Environment::arrayse
+# b Environment::declref
+# disable 1 2 3 4 5
+start
+c
+c
+c
